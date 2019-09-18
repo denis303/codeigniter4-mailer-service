@@ -1,6 +1,6 @@
 # CodeIgniter 4 Mailer Service
 
-## Configuration file (App\Config\Mailer.php)
+### Configuration file (App\Config\Mailer.php)
 
 ```
 <?php
@@ -17,7 +17,7 @@ class Mailer extends \CodeIgniter\Config\BaseConfig;
 }
 ```
 
-## Mailer service config (App\Config\Services.php)
+### Mailer service config (App\Config\Services.php)
 
 ```
 public static function mailer($getShared = true)
@@ -33,7 +33,7 @@ public static function mailer($getShared = true)
 }
 ```
 
-## Usage
+### Usage
 
 ```
 $user = \App\Models\UserModel::find(1);
