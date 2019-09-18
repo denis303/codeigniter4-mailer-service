@@ -12,6 +12,20 @@ class MailerService
 
     public $fromEmail;
 
+    public function getUserToEmail($user)
+    {
+        $model = new UserModel;
+
+        return $model->getUserEmail($user);
+    }
+
+    public function getUserToName($user)
+    {
+        $model = new UserModel;
+
+        return $model->getUserName($user);
+    }
+
     public function sendToUser(User $user, string $subject, string $message, & $error = null)
     {
         $email = Services::email();
@@ -19,14 +33,8 @@ class MailerService
         $email->setFrom($this->fromEmail, $this->fromName);
 
         $email->initialize(['mailType' => 'html']);
-
-        $model = new UserModel;
-
-        $toEmail = $model->getUserEmail($user);
-
-        $toName = $model->getUserName($user);
         
-        $email->setTo($toEmail, $toName);
+        $email->setTo($this->getUserToEmail($user), $this->getUserToName($user));
 
         $email->setSubject($subject);
 
