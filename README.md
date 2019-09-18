@@ -7,7 +7,7 @@
 
 namespace Config;
 
-class Mailer extends \CodeIgniter\Config\BaseConfig;
+class Mailer extends \CodeIgniter\Config\BaseConfig
 {
 
     public $fromEmail;
