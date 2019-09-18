@@ -8,9 +8,16 @@ use App\Models\UserModel;
 class MailerService
 {
 
-    public $fromName;
+    protected $fromName;
 
-    public $fromEmail;
+    protected $fromEmail;
+
+    public function __construct($fromEmail, $fromName)
+    {
+        $this->fromEmail = $fromEmail;
+
+        $this->fromName = $fromName;
+    }
 
     public function getUserToEmail($user)
     {
