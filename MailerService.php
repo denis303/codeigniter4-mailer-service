@@ -43,9 +43,9 @@ class MailerService
     {
         $email = Services::email();
 
-        $email->setFrom($this->fromEmail, $this->fromName);
-
         $email->initialize(['mailType' => 'html']);
+
+        $email->setFrom($this->fromEmail, $this->fromName);
         
         $email->setTo($this->getUserToEmail($user), $this->getUserToName($user));
 
