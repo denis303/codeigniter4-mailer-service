@@ -33,7 +33,7 @@ public static function mailer($getShared = true)
 }
 ```
 
-### Usage
+## Usage
 
 ```
 $user = \App\Models\UserModel::find(1);
