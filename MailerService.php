@@ -2,11 +2,13 @@
 
 namespace denis303\codeigniter4;
 
-use App\Models\User;
+use Config\Services;
 use App\Models\UserModel;
 
 class MailerService
 {
+
+    const USER_MODEL = UserModel::class;
 
     protected $fromName;
 
@@ -21,19 +23,23 @@ class MailerService
 
     public function getUserToEmail($user)
     {
-        $model = new UserModel;
+        $class = static::USER_MODEL;
+
+        $model = new $class;
 
         return $model->getUserEmail($user);
     }
 
     public function getUserToName($user)
     {
-        $model = new UserModel;
+        $class = static::USER_MODEL;
 
+        $model = new $class;
+        
         return $model->getUserName($user);
     }
 
-    public function sendToUser(User $user, string $subject, string $message, & $error = null)
+    public function sendToUser($user, string $subject, string $message, & $error = null)
     {
         $email = Services::email();
 
