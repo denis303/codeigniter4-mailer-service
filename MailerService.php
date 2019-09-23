@@ -21,7 +21,7 @@ class MailerService
         $this->fromName = $fromName;
     }
 
-    public function getUserToEmail($user)
+    public function getUserEmail($user)
     {
         $class = static::USER_MODEL;
 
@@ -30,7 +30,7 @@ class MailerService
         return $model->getUserEmail($user);
     }
 
-    public function getUserToName($user)
+    public function getUserName($user)
     {
         $class = static::USER_MODEL;
 
@@ -39,20 +39,8 @@ class MailerService
         return $model->getUserName($user);
     }
 
-    public function sendToUser($user, string $subject, string $message, & $error = null)
+    protected function _send(object $email, array $options = [], &$error = null)
     {
-        $email = Services::email();
-
-        $email->initialize(['mailType' => 'html']);
-
-        $email->setFrom($this->fromEmail, $this->fromName);
-        
-        $email->setTo($this->getUserToEmail($user), $this->getUserToName($user));
-
-        $email->setSubject($subject);
-
-        $email->setMessage($message);
-
         $return = $email->send();
 
         if (!$return)
@@ -68,6 +56,23 @@ class MailerService
         }
 
         return $return;
+    }
+
+    public function sendToUser($user, string $subject, string $message, array $options = [], &$error = null)
+    {
+        $email = Services::email();
+
+        $email->initialize(['mailType' => 'html']);
+
+        $email->setFrom($this->fromEmail, $this->fromName);
+        
+        $email->setTo($this->getUserEmail($user), $this->getUserName($user));
+
+        $email->setSubject($subject);
+
+        $email->setMessage($message);
+
+        return $this->_send($email, $options, $error);
     }
     
 }
